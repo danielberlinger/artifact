@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+<%= link_to 'Edit', edit_entry_path(@entry) %> |
+<%= link_to 'Back', entries_path %> |
+<a href="http://textile.thresholdstate.com/" target="_blank">Textile helper</a>
+
+<p>
+  <strong><%= @entry.title %></strong>
+</p>
+
+<p>
+  <%= spiffify(@entry.content) %>
+</p>
+
+
+<%= link_to 'Edit', edit_entry_path(@entry) %> |
+<%= link_to 'Back', entries_path %> |
+<a href="http://textile.thresholdstate.com/" target="_blank">Textile helper</a>
+
+<div id="revisions">
+  <strong>Revisions:</strong>
+  <ul>
+    <li><%= link_to "Current version", entry_path(@entry) %></li>
+    <%= get_sorted_versions(@entry) %>
+  </ul>
+</div>

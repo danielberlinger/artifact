@@ -1,4 +1,13 @@
 Artifact::Application.routes.draw do
+  devise_for :users
+  
+  match 'entries/version/:id' => 'entries#show_version'
+  resources :entries
+  match 'tags/:tag' => 'entries#show_by_tag'
+  match 'search/:query' => 'entries#search'
+  match 'search' => 'entries#search'
+  root :to => "entries#index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

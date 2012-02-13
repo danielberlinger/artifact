@@ -83,6 +83,8 @@ GEM
       activesupport (= 3.2.1)
       bundler (~> 1.0)
       railties (= 3.2.1)
+    rails_autolink (1.0.5)
+      rails (~> 3.1)
     railties (3.2.1)
       actionpack (= 3.2.1)
       activesupport (= 3.2.1)
@@ -130,6 +132,7 @@ DEPENDENCIES
   paper_trail
   pg
   rails (= 3.2.1)
+  rails_autolink
   sass-rails (~> 3.2.3)
   sqlite3-ruby
   uglifier (>= 1.0.3)

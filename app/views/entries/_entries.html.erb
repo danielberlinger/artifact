@@ -1,0 +1,10 @@
+<%= render 'shared/search' %>
+
+<div>
+<% @entries.each do |entry| %>
+  <div style="border-bottom: 1px dotted #999;">
+    <span style="font-weight:bold;"><%= link_to entry.title, entry %></span> | <%= link_to 'edit', edit_entry_path(entry) %> | <%= link_to 'destroy', entry, :confirm => 'Are you sure?', :method => :delete %> | <span style="color: #ccc"><%= entry.tags.collect {|tag| tag["name"]}.join(", ") %></span>
+    <div><%= spiffify(entry.content) %></div>
+  </div>
+<% end %>
+</div>

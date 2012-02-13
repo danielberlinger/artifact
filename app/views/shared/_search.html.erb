@@ -1,0 +1,11 @@
+<div id="search_container">
+<%= form_tag "/search", :method => 'get' do %>
+  <p><span>Searches title, content, any tag</span>
+    <%= text_field_tag :query, params[:query], :size => 51 %>
+    <%= submit_tag "Search", :name => nil %>
+    <%=  "<span class=\"search_box\">The search for &ldquo;#{@query}&rdquo;</span>".html_safe if @query %>  
+    <%=  "<span class=\"search_box\">found #{pluralize(@entries_size, 'entry')}:</span>".html_safe if @entries_size %>
+    <%=  "<div class=\"search_box\">#{@entries.collect {|entry| link_to entry.title, entry}.join(", ") }</div>".html_safe if @entries && @search %>
+  </p>
+<% end %>
+</div>

@@ -1,14 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Artifact</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <title>Artifact <%= ":: #{@entry.title}" if @entry %></title>
+  <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
 
-<%= yield %>
+<body>
+  
+	<div id="header">
+	  <a href="/" style="color:white;font-size:large;">Artifact</a>
+	  <ul class="hmenu" style="color: #000;">
+	   <% if user_signed_in? %>
+	   <li><%= link_to 'Entries', entries_path %> | </li>
+	   <li><%= link_to 'New Entry', new_entry_path %> || </li>
+     <%= render 'devise/menu/registration_items' %>
+     <% end %>
+     <%= render 'devise/menu/login_items' %>
+   </ul>
+   <span class="notice"><%= notice %></span>
+   <span class="alert"><%= alert %></span>
+  </div>
+
+	<div id="center" class="column">
+		<%= yield %>
+	</div>
+
+	<div id="left" class="column">
+	  <% if user_signed_in? %>
+		<h3>Tags</h3>
+    <p><%= Tag.all.collect {|tag| "<a href=\"/tags/#{tag['name']}\">#{tag['name']}</a>"}.join(", ").html_safe %></p>
+    <% end %>
+	</div>
+
+	<div id="right" class="column">
+	  <% if user_signed_in? %>
+	  <h3>Entries</h3>
+	  <ul>
+	    <%= entry_list(@all_entries) if @all_entries  %>
+	  </ul>
+	  <% end %>
+	</div>
+
+	<div id="footer">Artifact &copy; Digital Devs <%= DateTime.now.year %>. Thanks for coming down here and reading. No one ever does. It's like a dungeon down here!</div>
 
 </body>
+
 </html>
