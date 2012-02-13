@@ -13,6 +13,7 @@ gem "devise"
 gem "coderay"
 gem "RedCloth"
 gem "paper_trail"
+gem 'rails_autolink'
 
 
 # Gems used only for assets and not required
