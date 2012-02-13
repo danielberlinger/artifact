@@ -7,6 +7,7 @@ gem 'rails', '3.2.1'
 
 gem 'sqlite3-ruby', :require => 'sqlite3', :group => :development
 gem "pg", :group => :production
+gem 'thin', :group => :production
 
 gem 'acts-as-taggable-on'
 gem "devise"
