@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Temp::Application.load_tasks
+Artifact::Application.load_tasks

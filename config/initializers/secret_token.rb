@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Temp::Application.config.secret_token = '19a941ac586c45eb12ce620ff057edb260fcdb5bf14a2dfedec6533140ae8b3958e8868f27e41700f1755750e17157f9ad7962090060bbbec21938ad4aca6a90'
+Artifact::Application.config.secret_token = 'eb0a8c1be74c2b55c6cd44fefce8f7dd8c153c7982194979da454f3e975f382a309eee77706263a6ee438f7faf57d24ef5781c4e83c6b0938983d0cf094b7b76'
