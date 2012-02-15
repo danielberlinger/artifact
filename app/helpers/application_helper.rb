@@ -14,7 +14,7 @@ module ApplicationHelper
   
   def entry_list(entries)
     entries.collect do |entry| 
-      "<li style=\"line-height: 8px;\">#{link_to(entry.title, entry)}</li>"
+      "<li style=\"line-height: 10px;font-size: 11px;\">#{link_to(entry.title, entry)}</li>"
     end.join("\n").html_safe
   end
   
