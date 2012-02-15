@@ -2,6 +2,6 @@
 <div class="well">
   <h3><%= link_to entry.title, entry %></h3>
   <%= link_to 'edit', edit_entry_path(entry) %> • <%= link_to 'destroy', entry, :confirm => 'Are you sure?', :method => :delete %> <% if entry.tags.size > 0 %> • <% end %><span style="color: #ccc"><%= entry.tags.collect {|tag| tag["name"]}.join(", ") %></span>
-  <p><%= truncate(entry.content, :length => 500) %></p>
+  <p><%= spiffify("<code>#{(truncate(clear_for_entries_index(entry.content), :length => 500))}</code>") %></p>
 </div>
 <% end %>

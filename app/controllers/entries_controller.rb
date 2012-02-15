@@ -5,7 +5,7 @@ class EntriesController < ApplicationController
   # GET /entries
   # GET /entries.xml 
   def index
-    @entries = Entry.limit(9).last_updated.includes(:tags)
+    @entries = Entry.limit(10).last_updated.includes(:tags)
     
     respond_to do |format|
       format.html # index.html.erb

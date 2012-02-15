@@ -22,4 +22,10 @@ module ApplicationHelper
     Textilizer.new(text).to_html unless text.blank?
   end
   
+  def clear_for_entries_index(text)
+    text.gsub(/\<code( lang="(.+?)")?\>(.+?)\<\/code\>/m) do
+      $3
+    end
+  end
+  
 end
