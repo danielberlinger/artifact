@@ -14,7 +14,7 @@ module ApplicationHelper
   
   def entry_list(entries)
     entries.collect do |entry| 
-      "<li>#{link_to(entry.title, entry)}</li>"
+      "<li style=\"line-height: 8px;\">#{link_to(entry.title, entry)}</li>"
     end.join("\n").html_safe
   end
   
@@ -22,10 +22,13 @@ module ApplicationHelper
     Textilizer.new(text).to_html unless text.blank?
   end
   
-  def clear_for_entries_index(text)
-    text.gsub(/\<code( lang="(.+?)")?\>(.+?)\<\/code\>/m) do
-      $3
+  def clear_code_tags(text)
+    if /\<code( lang="(.+?)")?\>(.+?)\<\/code\>/m =~ text
+      text.gsub(/\<code( lang="(.+?)")?\>(.+?)\<\/code\>/m) do
+        return "<code>#{$3}</code>"
+      end
     end
+    return text
   end
   
 end
