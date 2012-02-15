@@ -1,11 +1,7 @@
-<%= render 'shared/search' %>
-
-<div>
 <% @entries.each do |entry| %>
-  <div style="border-bottom: 1px dotted #999;">
-    <span style="font-weight:bold;"><%= link_to entry.title, entry %></span> | <%= link_to 'edit', edit_entry_path(entry) %> | <%= link_to 'destroy', entry, :confirm => 'Are you sure?', :method => :delete %> | <span style="color: #ccc"><%= entry.tags.collect {|tag| tag["name"]}.join(", ") %></span>
-    <div><%= spiffify(entry.content) %></div>
-  </div>
-<% end %>
-  <p><%= link_to("View details &raquo;".html_safe, entry, :class => 'btn') %></p>
+<div class="well">
+  <h3><%= link_to entry.title, entry %></h3>
+  <%= link_to 'edit', edit_entry_path(entry) %> • <%= link_to 'destroy', entry, :confirm => 'Are you sure?', :method => :delete %> <% if entry.tags.size > 0 %> • <% end %><span style="color: #ccc"><%= entry.tags.collect {|tag| tag["name"]}.join(", ") %></span>
+  <p><%= truncate(entry.content, :length => 500) %></p>
 </div>
+<% end %>
