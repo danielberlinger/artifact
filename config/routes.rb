@@ -1,6 +1,10 @@
 Artifact::Application.routes.draw do
   devise_for :users
   
+  resources :users
+  
+  
+  
   match 'entries/version/:id' => 'entries#show_version'
   resources :entries
   match 'tags/:tag' => 'entries#show_by_tag'
