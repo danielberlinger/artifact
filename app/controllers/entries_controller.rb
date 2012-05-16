@@ -1,6 +1,6 @@
 class EntriesController < ApplicationController
   
-  before_filter :set_all_entries
+  before_filter :authenticate_user!, :set_all_entries
     
   # GET /entries
   # GET /entries.xml 

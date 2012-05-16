@@ -55,5 +55,9 @@ module Artifact
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    
+    config.to_prepare {
+      Devise::SessionsController.layout "not_logged_in"
+    }
   end
 end
