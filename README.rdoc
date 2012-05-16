@@ -4,13 +4,13 @@ Way back in June of 2010 my team was really unhappy with the wiki type tools ava
 
 No claims are being made that is a be all or end all tool for anyone else, but a few years later it continues to suffice.
 
-I long ago wanted to open source it, but never got around to it. Never mind the shame of never having written a test for anything. It was the classic prototype goes into production deal. I hope to back fill the tests, but in the meantime the ideas are still valid, and if you consider this a prototype, you'll be fine.
+I long ago wanted to open source it (and now I have...), but never got around to it (back then). Never mind the shame of never having written a test for anything. It was the classic prototype goes into production deal. I hope to back fill the tests, but in the meantime the ideas are still valid, and if you consider this a prototype, you'll be fine.
 
-This is not the original repository because I no longer have access to it, but as bonus, this has been updated so it runs Rails 3.1.x as of this writing. Although some functionality has been eliminated because I don't have access to the original. That's cool, it was nothing core anyway.
+This is not the original repository because I no longer have access to it, but as bonus, this has been updated so it runs Rails 3.2.x as of this writing. Although some functionality has been eliminated because I don't have access to the original. That's cool, it was nothing core anyway.
 
-There's a few other things that need cleaning up. The image used in the header and footer is not attributed and I don't know the source. It will have to be replaced. And a reasonable home page flow needs to be created. I didn't think the original worked the way I wanted... anyway, and as I said I don't have access to it anyway.
+There's a few other things that need cleaning up. The image used in the header and footer is not attributed and I don't know the source. It will have to be replaced.(Done!) And a reasonable home page flow needs to be created. I didn't think the original worked the way I wanted anyway..., and as I said I don't have access to it so... onward!
 
-For use, it's pretty straightforward. Create one entry for each bit of data. Tag it with a comma separated list of tags(no spaces for now)if you care to. Search and ye shall find. Versions are stored, so that folks feel comfortable editing. That's it for now.
+For use, it's pretty straightforward. Create one entry for each bit of data. Tag it with a comma separated list of tags(no spaces for now) if you care to. Search and ye shall find. Versions are stored, so that folks feel comfortable editing. That's it for now.
 
 Enjoy,
 
