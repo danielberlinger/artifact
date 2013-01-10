@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.3'
+gem 'rails', '3.2.11'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -16,6 +16,7 @@ gem "coderay"
 gem "RedCloth"
 gem "paper_trail"
 gem 'rails_autolink'
+gem 'redcarpet'
 
 
 # Gems used only for assets and not required
