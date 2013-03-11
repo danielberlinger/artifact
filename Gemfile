@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '3.2.12'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -11,10 +11,10 @@ gem "pg", :group => :production
 gem 'thin', :group => :production
 
 gem 'acts-as-taggable-on'
-gem "devise"
-gem "coderay"
-gem "RedCloth"
-gem "paper_trail"
+gem 'devise'
+gem 'coderay'
+gem 'RedCloth'
+gem 'paper_trail', '~> 2'
 gem 'rails_autolink'
 
 gem 'json', '1.7.7'
@@ -48,3 +48,6 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+
+#For Heroku
+#ruby "2.0.0"
