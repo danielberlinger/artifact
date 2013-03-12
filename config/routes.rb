@@ -1,12 +1,15 @@
 Artifact::Application.routes.draw do
+
   devise_for :users
-  
   resources :users
-  
-  
-  
+
   match 'entries/version/:id' => 'entries#show_version'
-  resources :entries
+  resources :entries do
+    member do
+      post :set_token
+      delete :remove_token
+    end
+  end
   match 'tags/:tag' => 'entries#show_by_tag'
   match 'search/:query' => 'entries#search'
   match 'search' => 'entries#search'

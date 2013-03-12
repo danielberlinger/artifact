@@ -1,6 +1,7 @@
 class EntriesController < ApplicationController
 
-  before_filter :authenticate_user!, :except => [:new, :create]
+  before_filter :authenticate_user!, :except => [:new, :create, :show]
+  before_filter :require_authenticated_user_or_access_token!, :only => [:show]
   before_filter :set_all_entries
 
   # GET /entries
@@ -132,8 +133,32 @@ class EntriesController < ApplicationController
     end
   end
 
+  def set_token
+    @entry = Entry.find(params[:id])
+    if @entry.set_token
+      flash[:notice] = 'Token successfully set.'
+    else
+      flash[:error] = 'Error encountered while setting token!'
+    end
+
+    redirect_to entries_path
+  end
+
+  def remove_token
+    @entry = Entry.find(params[:id])
+    if @entry.remove_token
+      flash[:notice] = 'Token successfully removed.'
+    else
+      flash[:error] = 'Error encountered while removing token!'
+    end
+
+    redirect_to entries_path
+  end
+
   private
+
   def set_all_entries
      @all_entries = Entry.limit(100).by_date
   end
+
 end

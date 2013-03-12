@@ -9,6 +9,7 @@ gem 'rails', '3.2.12'
 gem 'mysql2', :group => :development
 gem "pg", :group => :production
 gem 'thin', :group => :production
+gem 'chronic_duration'
 
 gem 'acts-as-taggable-on'
 gem 'devise'
