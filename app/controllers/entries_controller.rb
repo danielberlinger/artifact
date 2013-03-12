@@ -1,31 +1,32 @@
 class EntriesController < ApplicationController
-  
-  before_filter :authenticate_user!, :set_all_entries
-    
+
+  before_filter :authenticate_user!, :except => [:new, :create]
+  before_filter :set_all_entries
+
   # GET /entries
-  # GET /entries.xml 
+  # GET /entries.xml
   def index
     @entries = Entry.limit(10).last_updated.includes(:tags)
-    
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @entries }
       format.atom
     end
   end
-  
+
   def show_by_tag
     @query = params[:tag]
     @entries = Entry.tagged_with(params[:tag]).by_date
     @entries_size = @entries.size
     @search = true
-    
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @entries }
     end
   end
-  
+
   def search
     @query = params[:query]
     if params[:all]
@@ -35,7 +36,7 @@ class EntriesController < ApplicationController
     end
     @entries_size = @entries.size
     @search = true
-    
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @entries }
@@ -53,7 +54,7 @@ class EntriesController < ApplicationController
       format.json  { render :json => @entry }
     end
   end
-  
+
   def show_version
    @entry = Version.find(params[:id]).reify
 
@@ -84,12 +85,15 @@ class EntriesController < ApplicationController
   def create
     tag_list = params["entry"]["tags"]
     params["entry"].delete("tags")
-    
+
     @entry = Entry.new(params["entry"])
     @entry.tag_list = tag_list
     respond_to do |format|
       if @entry.save
-        format.html { redirect_to(@entry, :notice => 'Entry was successfully created.') }
+        format.html {
+          msg = 'Entry was successfully created.'
+          user_signed_in? ? redirect_to(@entry, :notice => msg) : render(:text => msg)
+        }
         format.xml  { render :xml => @entry, :status => :created, :location => @entry }
       else
         format.html { render :action => "new" }
@@ -127,7 +131,7 @@ class EntriesController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   private
   def set_all_entries
      @all_entries = Entry.limit(100).by_date

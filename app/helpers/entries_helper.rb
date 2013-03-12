@@ -5,7 +5,7 @@ module EntriesHelper
       if version.object != nil
         "<li><a href=\"/entries/version/#{version.id}\">#{version.id}, #{User.find(version.whodunnit.to_i).email} , #{version.created_at.strftime('%a %b %d %Y %H:%M:%S %Z')}, #{version.event}</a> </li>"
       else
-        "<li>#{version.id}, #{User.find(version.whodunnit.to_i).email} , #{version.created_at.strftime('%a %b %d %Y %H:%M:%S %Z')}, #{version.event}</li>"
+        "<li>#{version.id}, #{User.find_by_id(version.whodunnit.to_i).try(:email) || 'ANONYMOUS'} , #{version.created_at.strftime('%a %b %d %Y %H:%M:%S %Z')}, #{version.event}</li>"
       end
     end.join.html_safe
 
