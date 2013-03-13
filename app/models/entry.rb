@@ -10,7 +10,6 @@ class Entry < ActiveRecord::Base
 
   validates_presence_of :title, :content
 
-
   def self.search(query)
     unless query.to_s.strip.empty?
       tokens = query.split(/ |\+|,/).collect {|c| "%#{c.downcase}%"}
