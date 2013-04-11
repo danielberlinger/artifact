@@ -76,7 +76,7 @@
         <ul class="nav nav-list">
           <% if user_signed_in? %>
           <li class="nav-header">Tags</li>
-          <p><%= Tag.all.collect {|tag| "<a href=\"/tags/#{tag['name']}\">#{tag['name']}</a>"}.join(", ").html_safe %></p>
+          <p><%= Tag.order("name ASC").all.collect {|tag| "<a href=\"/tags/#{tag['name']}\">#{tag['name']}</a>"}.join(", ").html_safe %></p>
           <% end %>
         </ul>   
       </div><!--/.well -->
