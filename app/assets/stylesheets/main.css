@@ -31,5 +31,8 @@ body {
 .fixed-fixed {
     margin: 0 240px;
 }
-
-​
+.access-token {
+  background:#dfdfdf;
+  border-radius:3px;
+  padding:1px 6px;
+}

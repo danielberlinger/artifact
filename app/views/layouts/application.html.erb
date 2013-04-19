@@ -44,8 +44,8 @@
         </a>
         <a class="brand" href="/">Artifact</a>
         <div class="nav-collapse">
+          <% if user_signed_in? %>
           <ul class="nav">
-            <% if user_signed_in? %>
             <%- if current_page?(:controller => 'entries', :action => 'index') -%>
             <li class="active"><%= link_to 'Entries', entries_path %></li>
             <%- else -%>
@@ -58,6 +58,11 @@
             <%- end -%>
           </ul>
           <p class="navbar-text pull-right">Logged in as <%= render 'devise/menu/login_items' %></p>
+          <% else %>
+          <ul class="nav">
+            <li><%= link_to 'New Entry', new_entry_path %></li>
+          </ul>
+          <p class="navbar-text pull-right">Logged in as <strong>ANONYMOUS</strong></p>
           <% end %>
         </div><!--/.nav-collapse -->
       </div>
@@ -71,7 +76,7 @@
         <ul class="nav nav-list">
           <% if user_signed_in? %>
           <li class="nav-header">Tags</li>
-          <p><%= Tag.all.collect {|tag| "<a href=\"/tags/#{tag['name']}\">#{tag['name']}</a>"}.join(", ").html_safe %></p>
+          <p><%= Tag.order("name ASC").all.collect {|tag| "<a href=\"/tags/#{tag['name']}\">#{tag['name']}</a>"}.join(", ").html_safe %></p>
           <% end %>
         </ul>   
       </div><!--/.well -->

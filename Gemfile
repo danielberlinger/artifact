@@ -1,51 +1,53 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.12'
+gem 'rails', '3.2.13'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-#gem 'sqlite3-ruby', :require => 'sqlite3', :group => :development
-gem 'mysql2', :group => :development
 gem "pg", :group => :production
-gem 'thin', :group => :production
-
+gem 'RedCloth'
 gem 'acts-as-taggable-on'
-gem "devise"
-gem "coderay"
-gem "RedCloth"
-gem "paper_trail"
+gem 'chronic_duration'
+gem 'coderay'
+gem 'devise'
+gem 'jquery-rails'
+gem 'json', '1.7.7'
+gem 'mysql2', :group => :development
+gem 'paper_trail', '~> 2'
 gem 'rails_autolink'
 gem 'redcarpet'
 
 gem 'json', '1.7.7'
 
+gem 'thin', :group => :production
 
-# Gems used only for assets and not required
-# in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer'
-
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
+group :test do
+  gem 'minitest', :require => false
+  gem 'capybara'
+  gem 'shoulda'
+  gem 'shoulda-matchers', '1.4.1'
+  gem 'simplecov', :require => false
+  gem 'turn', :require => false
+  gem 'mocha', :require => false
+  gem 'database_cleaner'
+  gem 'poltergeist'
+  gem 'launchy'
+  gem 'capybara-email'
+  gem 'vcr'
+  gem 'webmock', ['>= 1.8.0', '< 1.9']
+end
 
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the web server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
+group :test, :development, :staging do
+  gem 'factory_girl_rails'
+  gem 'flay', :require => false
+  gem 'flog', :require => false
+  gem 'rack-test', :require => 'rack/test'
+  gem 'roodi', :require => false
+  gem 'awesome_print'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+end

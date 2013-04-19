@@ -1,7 +1,11 @@
 <% @entries.each do |entry| %>
 <div class="well">
   <h3><%= link_to entry.title, entry %></h3>
-  <%= link_to 'edit', edit_entry_path(entry) %> • <%= link_to 'destroy', entry, :confirm => 'Are you sure?', :method => :delete %> <% if entry.tags.size > 0 %> • <% end %><span style="color: #ccc"><%= entry.tags.collect {|tag| tag["name"]}.join(", ") %></span>
+  <%= link_to 'edit', edit_entry_path(entry) %> •
+  <%= link_to 'destroy', entry, :confirm => 'Are you sure?', :method => :delete %>
+  <% if entry.tags.size > 0 %> • <% end %>
+  <span style="color: #ccc"><%= entry.tags.collect {|tag| tag["name"]}.join(", ") %></span><br />
+  <%= access_token_status(entry) %>
   <p><%= spiffify(entry.content) %></p>
 </div>
 <% end %>

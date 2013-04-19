@@ -1,7 +1,9 @@
 <p id="notice"><%= notice %></p>
+<% if user_signed_in? %>
 <%= link_to 'Edit', edit_entry_path(@entry) %> |
 <%= link_to 'Back', entries_path %> |
 <a href="http://textile.thresholdstate.com/" target="_blank">Textile helper</a>
+<% end %>
 
 <p>
   <strong><%= @entry.title %></strong>
@@ -12,6 +14,7 @@
 </p>
 
 
+<% if user_signed_in? %>
 <%= link_to 'Edit', edit_entry_path(@entry) %> |
 <%= link_to 'Back', entries_path %> |
 <a href="http://textile.thresholdstate.com/" target="_blank">Textile helper</a>
@@ -23,3 +26,4 @@
     <%= get_sorted_versions(@entry) %>
   </ul>
 </div>
+<% end %>
