@@ -1,8 +1,16 @@
 module ApplicationHelper
   
-  def spiffify(text)
+  def old_spiffify(text)
     unless text.empty?
       auto_link(textilize(coderay(text).html_safe).html_safe).html_safe
+    end
+  end
+  
+  
+  def spiffify(text)
+    unless text.empty?
+      markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
+      markdown.render(text).html_safe
     end
   end
   

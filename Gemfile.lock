@@ -144,6 +144,7 @@ GEM
     rake (10.0.3)
     rdoc (3.12.2)
       json (~> 1.4)
+    redcarpet (2.2.2)
     roodi (2.1.0)
       ruby_parser
     ruby_parser (3.1.1)
@@ -228,6 +229,7 @@ DEPENDENCIES
   rack-test
   rails (= 3.2.13)
   rails_autolink
+  redcarpet
   roodi
   sass-rails (~> 3.2.3)
   shoulda
