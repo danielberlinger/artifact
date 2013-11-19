@@ -1,3 +1,4 @@
+require 'tinder'
 class Entry < ActiveRecord::Base
 
   TokenExpiry = 2.weeks
@@ -9,6 +10,10 @@ class Entry < ActiveRecord::Base
   scope :last_updated, order("entries.updated_at DESC")
 
   validates_presence_of :title, :content
+  
+  after_create :notify_after_create
+  after_update :notify_after_update
+  after_destroy :notify_after_destroy
 
   def self.search(query)
     unless query.to_s.strip.empty?
@@ -48,6 +53,28 @@ class Entry < ActiveRecord::Base
   def remove_token
     # Using this to avoid unnecessary versions/timestamp updates
     self.class.update_all({:access_token => nil, :access_token_expires_at => nil}, {:id => id})
+  end
+  
+  private
+  
+  def campfire_helper(token)
+    if Rails.env.production?
+      campfire = Tinder::Campfire.new('medivo', { :token => '641ff5dcb2ac49623df07721fa37fb537a95486f', :ssl => true})
+      room = campfire.find_room_by_name('Medivo iTeam')
+      room.speak ":bicyclist: [ARTFCT] (https://artifact.medivo.com/entries/#{self.id}) #{token} by #{User.find(self.versions.last.whodunnit).email}, #{self.title}"
+    end
+  end
+  
+  def notify_after_create
+    campfire_helper("created")
+  end
+  
+  def notify_after_update
+    campfire_helper("updated")
+  end
+  
+  def notify_after_destroy
+    campfire_helper("destroyed")
   end
 
 end

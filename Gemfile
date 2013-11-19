@@ -16,6 +16,7 @@ gem 'paper_trail', '~> 2'
 gem 'rails_autolink'
 gem 'thin', :group => :production
 gem 'redcarpet'
+gem 'tinder'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
