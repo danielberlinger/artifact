@@ -13,10 +13,10 @@
 
   <!-- Le styles -->
   <%= stylesheet_link_tag "application", :media => "all" %>
-  
+
   <link rel="stylesheet" href="https://yandex.st/highlightjs/7.3/styles/tomorrow-night-bright.min.css">
   <script src="https://yandex.st/highlightjs/7.3/highlight.min.js"></script>
-  
+
   <script>
   hljs.tabReplace = '    ';
   hljs.initHighlightingOnLoad();
@@ -86,7 +86,7 @@
           <li class="nav-header">Tags</li>
           <p><%= Tag.order("name ASC").all.collect {|tag| "<a href=\"/tags/#{tag['name']}\">#{tag['name']}</a>"}.join(", ").html_safe %></p>
           <% end %>
-        </ul>   
+        </ul>
       </div><!--/.well -->
 
 
@@ -102,8 +102,8 @@
 
       <div class="content fixed-fixed">
         <div class="hero-unit">
-          <span class=""><%= notice %></span>
-          <span class=""><%= alert %></span>
+          <% if notice %><span class="alert alert-info"><%= notice %></span><% end %>
+          <% if alert %><span class="alert alert-warning"><%= alert %></span><% end %>
           <p><%= render 'shared/search' %></p>
         </div>
         <div class="row-fluid">
