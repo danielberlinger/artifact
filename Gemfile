@@ -14,7 +14,7 @@ gem 'json', '1.7.7'
 gem 'mysql2', :group => :development
 gem 'paper_trail', '~> 2'
 gem 'rails_autolink'
-gem 'thin', :group => :production
+#gem 'thin', :group => :production
 gem 'redcarpet'
 gem 'tinder'
 
