@@ -61,7 +61,7 @@ class Entry < ActiveRecord::Base
     if Rails.env.production?
       campfire = Tinder::Campfire.new('medivo', { :token => '641ff5dcb2ac49623df07721fa37fb537a95486f', :ssl => true})
       room = campfire.find_room_by_name('Medivo iTeam')
-      room.speak ":bicyclist: [ARTFCT] (https://artifact.medivo.com/entries/#{self.id}) #{token} by #{User.find(self.versions.last.whodunnit).email}, #{self.title}"
+      room.speak ":bicyclist: [ARTFCT] (https://artifact.medivo.io/entries/#{self.id}) #{token} by #{User.find(self.versions.last.whodunnit).email}, #{self.title}"
     end
   end
   
