@@ -10,6 +10,8 @@ Artifact::Application.routes.draw do
       delete :remove_token
     end
   end
+  
+  get "sr", :to => 'entries#sr'
   match 'tags/:tag' => 'entries#show_by_tag'
   match 'search/:query' => 'entries#search'
   match 'search' => 'entries#search'
