@@ -69,20 +69,27 @@ class Entry < ActiveRecord::Base
 
     stats = ":thought_balloon: Search for #{query}: Elapsed time #{took} seconds for #{total} records"
     top_three.unshift(stats.to_json)
-
-    campfire = Tinder::Campfire.new('medivo', { :token => '641ff5dcb2ac49623df07721fa37fb537a95486f', :ssl => true})
-    room = campfire.find_room_by_name('notifications')
-    top_three.each {|r| room.speak "#{r}"}
-    room.paste results.join("\n")
+    
+    if Rails.env.production?
+      room = self.new_fire('notifications')#room name needs to be changed when dev is done...
+    
+      top_three.each {|r| room.speak "#{r}"}
+      room.paste results.join("\n")
+    end
+    
     "OK"
   end
   
   private
   
+  def self.new_fire(room_name)
+    campfire = Tinder::Campfire.new('medivo', { :token => '641ff5dcb2ac49623df07721fa37fb537a95486f', :ssl => true})
+    room = campfire.find_room_by_name(room_name)
+  end
+  
   def campfire_helper(token)
     if Rails.env.production?
-      campfire = Tinder::Campfire.new('medivo', { :token => '641ff5dcb2ac49623df07721fa37fb537a95486f', :ssl => true})
-      room = campfire.find_room_by_name('Medivo iTeam')
+      room = self.new_fire('Medivo iTeam')
       room.speak ":bicyclist: [ARTFCT] (https://artifact.medivo.io/entries/#{self.id}) #{token} by #{User.find(self.versions.last.whodunnit).email}, #{self.title}"
     end
   end
