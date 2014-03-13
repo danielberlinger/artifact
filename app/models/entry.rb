@@ -1,5 +1,7 @@
 require 'tinder'
 class Entry < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
 
   TokenExpiry = 2.weeks
 
@@ -15,7 +17,7 @@ class Entry < ActiveRecord::Base
   after_update :notify_after_update
   after_destroy :notify_after_destroy
 
-  def self.search(query)
+  def self.internal_search(query)
     unless query.to_s.strip.empty?
       tokens = query.split(/ |\+|,/).collect {|c| "%#{c.downcase}%"}
       results = find_by_sql(["select s.* from entries s where #{ (["(lower(s.title) like ? or lower(s.content) like ?)"] *

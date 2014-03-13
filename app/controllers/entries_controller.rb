@@ -31,9 +31,9 @@ class EntriesController < ApplicationController
   def search
     @query = params[:query]
     if params[:all]
-      @entries = Entry.search(@query)[:full]
+      @entries = Entry.internal_search(@query)[:full]
     else
-      @entries = Entry.search(@query)[:skipped]
+      @entries = Entry.internal_search(@query)[:skipped]
     end
     @entries_size = @entries.size
     @search = true
