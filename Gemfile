@@ -16,6 +16,9 @@ gem 'paper_trail', '~> 2'
 gem 'rails_autolink'
 gem 'redcarpet'
 gem 'tinder'
+#adding ES
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
