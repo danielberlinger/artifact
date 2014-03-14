@@ -1,8 +1,12 @@
 class EntriesController < ApplicationController
 
-  before_filter :authenticate_user!, :except => [:new, :create, :show]
+  before_filter :authenticate_user!, :except => [:new, :create, :show, :sr]
   before_filter :require_authenticated_user_or_access_token!, :only => [:show]
   before_filter :set_all_entries
+  
+  def sr
+    render text: Entry.external_search(params[:query])
+  end
 
   # GET /entries
   # GET /entries.xml
@@ -31,9 +35,9 @@ class EntriesController < ApplicationController
   def search
     @query = params[:query]
     if params[:all]
-      @entries = Entry.search(@query)[:full]
+      @entries = Entry.internal_search(@query)[:full]
     else
-      @entries = Entry.search(@query)[:skipped]
+      @entries = Entry.internal_search(@query)[:skipped]
     end
     @entries_size = @entries.size
     @search = true
