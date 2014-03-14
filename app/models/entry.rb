@@ -65,13 +65,13 @@ class Entry < ActiveRecord::Base
 
     results = response.results.map { |r| "#{r._source.title}: https://artifact.medivo.io/entries/#{r._id}" }
 
-    top_three = results[0..3]
+    top_three = results[0..2]
 
     stats = ":thought_balloon: Search for #{query}: Elapsed time #{took} seconds for #{total} records"
     top_three.unshift(stats.to_json)
     
     if Rails.env.production?
-      room = self.new_fire('Medivo iTeam')
+      room = Entry.new_fire('Medivo iTeam')
       top_three.each {|r| room.speak "#{r}"}
       room.paste results.join("\n")
     else
@@ -90,7 +90,7 @@ class Entry < ActiveRecord::Base
   
   def campfire_helper(token)
     if Rails.env.production?
-      room = self.new_fire('Medivo iTeam')
+      room = Entry.new_fire('Medivo iTeam')
       room.speak ":bicyclist: [ARTFCT] (https://artifact.medivo.io/entries/#{self.id}) #{token} by #{User.find(self.versions.last.whodunnit).email}, #{self.title}"
     end
   end
