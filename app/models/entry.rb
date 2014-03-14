@@ -68,14 +68,14 @@ class Entry < ActiveRecord::Base
     top_three = results[0..2]
 
     stats = ":thought_balloon: Search for #{query}: Elapsed time #{took} seconds for #{total} records"
-    top_three.unshift(stats.to_json)
+    top_three.unshift(stats)
     
     if Rails.env.production?
       room = Entry.new_fire('Medivo iTeam')
       top_three.each {|r| room.speak "#{r}"}
       room.paste results.join("\n")
     else
-      return results.unshift(stats.to_json).join("\n")
+      return results.unshift(stats).join("\n")
     end
     
     "OK"
