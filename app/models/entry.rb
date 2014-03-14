@@ -71,7 +71,7 @@ class Entry < ActiveRecord::Base
     top_three.unshift(stats.to_json)
     
     if Rails.env.production?
-      room = self.new_fire('notifications')#room name needs to be changed when dev is done...
+      room = self.new_fire('Medivo iTeam')
       top_three.each {|r| room.speak "#{r}"}
       room.paste results.join("\n")
     else
