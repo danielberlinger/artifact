@@ -72,9 +72,10 @@ class Entry < ActiveRecord::Base
     
     if Rails.env.production?
       room = self.new_fire('notifications')#room name needs to be changed when dev is done...
-    
       top_three.each {|r| room.speak "#{r}"}
       room.paste results.join("\n")
+    else
+      return results.unshift(stats.to_json).join("\n")
     end
     
     "OK"
