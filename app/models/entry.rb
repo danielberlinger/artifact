@@ -59,7 +59,7 @@ class Entry < ActiveRecord::Base
   
   def self.external_search(query)
     "OK" if query.blank?
-    response = Entry.search query
+    response = Entry.search query: { query_string: { query: query}}, size: 50
     took = response.took.to_f / 1000
     total = response.results.total
 
@@ -72,10 +72,11 @@ class Entry < ActiveRecord::Base
     
     if Rails.env.production?
       room = Entry.new_fire('Medivo iTeam')
+      return "OK, nil room" if room.nil?
       top_three.each {|r| room.speak "#{r}"}
-      room.paste results.join("\n")
+      room.speak results[3..results.size].join(", ") if results.size > 3
     else
-      return results.unshift(stats).join("\n")
+     return results.unshift(stats).join("\n")
     end
     
     "OK"
