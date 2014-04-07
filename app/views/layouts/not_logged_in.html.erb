@@ -87,13 +87,14 @@
       <%- end -%>
 
       <div class="content fixed-fixed">
-        <% if user_signed_in? %>
         <div class="hero-unit">
-          <span class=""><%= notice %></span>
-          <span class=""><%= alert %></span>
-          <p><%= render 'shared/search' %></p>
+          <% if notice %><span class="alert alert-info"><%= notice %></span><% end %>
+          <% if alert %><span class="alert alert-warning"><%= alert %></span><% end %>
+
+          <% if user_signed_in? %>
+            <p><%= render 'shared/search' %></p>
+          <%- end -%>
         </div>
-        <%- end -%>
         <div class="row-fluid">
           <%= yield %>
         </div><!--/row-->
