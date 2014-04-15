@@ -3,7 +3,9 @@ class EntriesController < ApplicationController
   before_filter :authenticate_user!, :except => [:new, :create, :show, :sr]
   before_filter :require_authenticated_user_or_access_token!, :only => [:show]
   before_filter :set_all_entries
-  
+
+  protect_from_forgery :except => [:create]
+
   def sr
     render text: Entry.external_search(params[:query])
   end
@@ -87,23 +89,39 @@ class EntriesController < ApplicationController
 
   # POST /entries
   # POST /entries.xml
+  # POST /entries.json
   def create
-    tag_list = params["entry"]["tags"]
-    params["entry"].delete("tags")
-
-    @entry = Entry.new(params["entry"])
+    tag_list        = params["entry"].delete("tags")
+    @entry          = Entry.new(params["entry"])
     @entry.tag_list = tag_list
+
     respond_to do |format|
-      if @entry.save
-        format.html {
+      format.html {
+        verify_authenticity_token
+
+        if @entry.save
           msg = 'Entry was successfully created.'
           user_signed_in? ? redirect_to(@entry, :notice => msg) : render(:text => msg)
-        }
-        format.xml  { render :xml => @entry, :status => :created, :location => @entry }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @entry.errors, :status => :unprocessable_entity }
-      end
+        else
+          render :action => "new"
+        end
+      }
+      format.xml {
+        verify_authenticity_token
+
+        if @entry.save
+          render :xml => @entry, :status => :created, :location => @entry
+        else
+          render :xml => @entry.errors, :status => :unprocessable_entity
+        end
+      }
+      format.json {
+        if @entry.save
+          render :json => @entry, :status => :created, :location => @entry
+        else
+          render :json => @entry.errors, :status => :unprocessable_entity
+        end
+      }
     end
   end
 
